@@ -8,6 +8,7 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Service;
 
 import java.io.FileInputStream;
 import java.text.DateFormat;
@@ -18,7 +19,7 @@ import java.util.List;
 /**
  * Created by IT180517 on 7/10/2017.
  */
-@Configuration
+@Service
 @SuppressWarnings("deprecation")
 public class ReadExcel {
     public List<File1> parse(String filename){
