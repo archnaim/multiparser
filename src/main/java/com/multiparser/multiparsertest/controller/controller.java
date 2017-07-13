@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
+import java.util.stream.Stream;
 
 /**
  * Created by IT180517 on 7/10/2017.
@@ -21,6 +22,7 @@ public class controller {
     @GetMapping("/parse/{filename}/{start}/{stop}")
     public HashMap parse(@PathVariable String filename, @PathVariable String start, @PathVariable String stop) {
         HashMap list = readXls.parse(filename,Integer.parseInt(start),Integer.parseInt(stop));
+//        System.out.println(list.entrySet().stream().count());
         return list;
     }
 }

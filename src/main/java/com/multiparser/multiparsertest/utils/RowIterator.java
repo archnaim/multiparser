@@ -46,6 +46,9 @@ public class RowIterator {
                         case Cell.CELL_TYPE_FORMULA:
                             mapRow.put(cell.getColumnIndex(),cell.getNumericCellValue());
                             break;
+
+                        case Cell.CELL_TYPE_BLANK:
+                            mapRow.put(cell.getColumnIndex(),cell.getStringCellValue());
                     }
                 }
                 hashMap.put(row.getRowNum(),mapRow);
