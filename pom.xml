@@ -15,7 +15,7 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>1.5.4.RELEASE</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath/> <!-- lookup parent fRepositorytory -->
 	</parent>
 
 	<properties>
@@ -64,6 +64,11 @@
 			<groupId>com.fasterxml.jackson.dataformat</groupId>
 			<artifactId>jackson-dataformat-csv</artifactId>
 		</dependency>
+		<!--<dependency>-->
+			<!--<groupId>mysql</groupId>-->
+			<!--<artifactId>mysql-connector-java</artifactId>-->
+			<!--<version>6.0.3</version>-->
+		<!--</dependency>-->
 
 	</dependencies>
 
