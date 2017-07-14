@@ -30,51 +30,29 @@ public class controllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    private String expectedResponse;
+    private String expectedXls;
+    private String expectedCsv;
 
     @Before
     public void setUp() throws Exception {
-        this.expectedResponse ="{\n" +
-                "\"5\": {\n" +
-                "\"0\": \"01-06-2017\",\n" +
-                "\"4\": \"PUBLIC HOLIDAY\"\n" +
-                "},\n" +
-                "\"6\": {\n" +
-                "\"0\": \"02-06-2017\",\n" +
-                "\"4\": \"TASK : TR Request PPD untuk upload data user (ASM) #960526\",\n" +
-                "\"7\": 8,\n" +
-                "\"8\": 1\n" +
-                "},\n" +
-                "\"7\": {\n" +
-                "\"0\": \"03-06-2017\",\n" +
-                "\"4\": \"Weekend\"\n" +
-                "},\n" +
-                "\"8\": {\n" +
-                "\"0\": \"04-06-2017\",\n" +
-                "\"4\": \"Weekend\"\n" +
-                "},\n" +
-                "\"9\": {\n" +
-                "\"0\": \"05-06-2017\",\n" +
-                "\"4\": \"TASK : TR Request PPD untuk upload data user (ASM) #960526\",\n" +
-                "\"7\": 8,\n" +
-                "\"8\": 1\n" +
-                "},\n" +
-                "\"10\": {\n" +
-                "\"0\": \"06-06-2017\",\n" +
-                "\"4\": \"Enterprise Division - Weekly Meeting \",\n" +
-                "\"7\": 8,\n" +
-                "\"8\": 1\n" +
-                "}\n" +
-                "}";
-
+        this.expectedXls ="[{\"0\":\"01-06-2017\",\"1\":\"\",\"2\":\"\",\"3\":\"\",\"4\":\"PUBLIC HOLIDAY\",\"5\":\"\",\"6\":\"\",\"7\":\"\",\"8\":\"\"},{\"0\":\"02-06-2017\",\"1\":\"\",\"2\":\"\",\"3\":\"\",\"4\":\"TASK : TR Request PPD untuk upload data user (ASM) #960526\",\"5\":\"\",\"6\":\"\",\"7\":8.0,\"8\":1.0},{\"0\":\"03-06-2017\",\"1\":\"\",\"2\":\"\",\"3\":\"\",\"4\":\"Weekend\",\"5\":\"\",\"6\":\"\",\"7\":\"\",\"8\":\"\"},{\"0\":\"04-06-2017\",\"1\":\"\",\"2\":\"\",\"3\":\"\",\"4\":\"Weekend\",\"5\":\"\",\"6\":\"\",\"7\":\"\",\"8\":\"\"},{\"0\":\"05-06-2017\",\"1\":\"\",\"2\":\"\",\"3\":\"\",\"4\":\"TASK : TR Request PPD untuk upload data user (ASM) #960526\",\"5\":\"\",\"6\":\"\",\"7\":8.0,\"8\":1.0},{\"0\":\"06-06-2017\",\"1\":\"\",\"2\":\"\",\"3\":\"\",\"4\":\"Enterprise Division - Weekly Meeting \",\"5\":\"\",\"6\":\"\",\"7\":8.0,\"8\":1.0}]";
+        this.expectedCsv = "[{\"name\":\"Billy\",\"age\":\"28\"},{\"name\":\"Barbara\",\"age\":\"36\"}]";
     }
 
     @Test
     public void file1() throws Exception {
-        this.mockMvc.perform(get("/parse/file1/4/10"))
+        this.mockMvc.perform(get("/parseexcel/file1.xls/4/10"))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andDo(result -> result.equals(expectedResponse));
+                .andDo(result -> result.equals(expectedXls));
+    }
+
+    @Test
+    public void testCsv() throws Exception{
+        this.mockMvc.perform(get("/parsecsv/test.csv"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andDo(result -> result.equals(expectedCsv));
     }
 
 }

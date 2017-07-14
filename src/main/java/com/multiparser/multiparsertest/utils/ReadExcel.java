@@ -1,24 +1,52 @@
 package com.multiparser.multiparsertest.utils;
 
 import org.apache.poi.hssf.usermodel.HSSFDateUtil;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
-import org.springframework.stereotype.Component;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by IT180517 on 7/13/2017.
  */
-@Component
+
 @SuppressWarnings("deprecation")
-public class RowIterator {
-    public HashMap iterate(Sheet sheet, int startRow, int endRow)
+public class ReadExcel {
+
+    @Autowired
+    private ReadFile readFile;
+
+    public List parseXls(String filename, int startRow, int endRow) throws IOException {
+        FileInputStream file = readFile.asFileInputStream(filename);
+        HSSFWorkbook workbook = new HSSFWorkbook(file);
+        HSSFSheet sheet = workbook.getSheetAt(0);
+        List list = iterate(sheet,startRow,endRow);
+        return list;
+    }
+
+    public List parseXlsx(String filename, int startRow, int endRow) throws IOException{
+        FileInputStream file = readFile.asFileInputStream(filename);
+        XSSFWorkbook workbook = new XSSFWorkbook(file);
+        XSSFSheet sheet = workbook.getSheetAt(0);
+        List list = iterate(sheet,startRow,endRow);
+        return list;
+    }
+
+    public List iterate(Sheet sheet, int startRow, int endRow)
     {
-        HashMap hashMap = new HashMap();
+        List list = new ArrayList();
         for (Row row: sheet) {
             if(row.getRowNum()>startRow && row.getRowNum()<=endRow)
             {
@@ -51,7 +79,7 @@ public class RowIterator {
                             mapRow.put(cell.getColumnIndex(),cell.getStringCellValue());
                     }
                 }
-                hashMap.put(row.getRowNum(),mapRow);
+                list.add(mapRow);
 
             }
             else if (row.getRowNum()>endRow)
@@ -60,6 +88,6 @@ public class RowIterator {
             }
 
         }
-        return hashMap;
+        return list;
     }
 }
