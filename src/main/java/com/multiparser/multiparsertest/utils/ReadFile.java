@@ -1,8 +1,6 @@
 package com.multiparser.multiparsertest.utils;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.*;
 
 /**
  * Created by IT180517 on 7/14/2017.
@@ -24,4 +22,12 @@ public interface ReadFile {
      * @throws IOException
      */
     File asFile(String filename) throws IOException;
+
+    /**
+     *
+     * @param filename
+     * @return
+     * @throws IOException
+     */
+    BufferedInputStream bufferedInputStream(InputStream filename) throws IOException;
 }

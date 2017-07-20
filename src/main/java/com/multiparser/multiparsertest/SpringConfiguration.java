@@ -1,9 +1,6 @@
 package com.multiparser.multiparsertest;
 
-import com.multiparser.multiparsertest.utils.ReadExcel;
-import com.multiparser.multiparsertest.utils.ReadFile;
-import com.multiparser.multiparsertest.utils.ReadFileImpl;
-import com.multiparser.multiparsertest.utils.ReadTextFile;
+import com.multiparser.multiparsertest.utils.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -28,4 +25,7 @@ public class SpringConfiguration {
     public ReadTextFile readTextFile() {
         return new ReadTextFile();
     }
+
+    @Bean
+    public SftpConn sftpConn(){return new SftpConn();}
 }

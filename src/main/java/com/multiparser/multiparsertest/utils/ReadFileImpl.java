@@ -1,8 +1,8 @@
 package com.multiparser.multiparsertest.utils;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+import com.jcraft.jsch.ChannelSftp;
+
+import java.io.*;
 
 /**
  * Created by IT180517 on 7/14/2017.
@@ -47,5 +47,16 @@ public class ReadFileImpl implements ReadFile {
             e.printStackTrace();
         }
         return file;
+    }
+
+    /**
+     *
+     * @param filename
+     * @return
+     * @throws IOException
+     */
+    @Override
+    public BufferedInputStream bufferedInputStream(InputStream filename) throws IOException {
+        return new BufferedInputStream(filename);
     }
 }

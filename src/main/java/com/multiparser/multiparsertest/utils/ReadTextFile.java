@@ -38,6 +38,16 @@ public class ReadTextFile {
         return csvIterator.readAll();
     }
 
+    public List<Map<String, String>> parseCSVWithoutPOJO(InputStream filename) throws IOException {
+        BufferedInputStream file = readFile.bufferedInputStream(filename);
+        CsvMapper mapper = new CsvMapper();
+        CsvSchema schema = CsvSchema.emptySchema().withHeader(); // use first row as header; otherwise defaults are fine
+        MappingIterator<Map<String, String>> csvIterator = mapper.readerFor(Map.class)
+                .with(schema)
+                .readValues(file);
+        return csvIterator.readAll();
+    }
+
     /**
      *
      * @param filename
